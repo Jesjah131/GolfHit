@@ -19,46 +19,38 @@ import java.io.FileOutputStream;
 
 public class HitActivity extends AppCompatActivity {
 
-    EditText mEdit;
+    DatabaseHelper myDb;
+    EditText editClub, editDistance;
+    Button buttonSaveHit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hit);
+
+        myDb = new DatabaseHelper(this);
+
+        editClub = (EditText)findViewById(R.id.clubText);
+        editDistance = (EditText)findViewById(R.id.distanceText);
+        buttonSaveHit = (Button)findViewById(R.id.btnSaveHit);
+        AddData();
     }
 
-    @SuppressWarnings("null")
-    public String CreateXMLString() throws IllegalArgumentException, IllegalStateException, IOException
-    {
-        mEdit = (EditText)findViewById(R.id.clubText);
+    public void AddData(){
+        buttonSaveHit.setOnClickListener(
+               new View.OnClickListener(){
+                   @Override
+                   public void onClick(View v){
+                       boolean isInserted = myDb.insertData(editClub.getText().toString(), editDistance.getText().toString());
 
-        XmlSerializer xmlSerializer = Xml.newSerializer();
-        StringWriter writer = new StringWriter();
+                       if(isInserted == true)
+                           Toast.makeText(HitActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
 
-        xmlSerializer.setOutput(writer);
-
-        //Start Document
-        xmlSerializer.startDocument("UTF-8", true);
-        xmlSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-        //Open Tag <file>
-        xmlSerializer.startTag("", "file");
-
-        xmlSerializer.startTag("", "something");
-        xmlSerializer.attribute("", "ID", "000001");
-
-        xmlSerializer.startTag("", "club");
-        xmlSerializer.text(mEdit.getText().toString());
-        xmlSerializer.endTag("", "club");
-
-        xmlSerializer.endTag("", "something");
-
-
-
-        //end tag <file>
-        xmlSerializer.endTag("", "file");
-        xmlSerializer.endDocument();
-
-        return writer.toString();
+                       else
+                           Toast.makeText(HitActivity.this,"Data not Inserted",Toast.LENGTH_LONG).show();
+                   }
+               }
+        );
     }
 
     public void onClickBtn(View v)
