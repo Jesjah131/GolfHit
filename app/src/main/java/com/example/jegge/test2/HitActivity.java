@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 public class HitActivity extends AppCompatActivity {
 
     DatabaseHelper myDb;
-    EditText editClub, editDistance;
+    EditText editClub, editDistance, editWind, editHit;
     Button buttonSaveHit;
 
     @Override
@@ -32,6 +32,8 @@ public class HitActivity extends AppCompatActivity {
 
         editClub = (EditText)findViewById(R.id.clubText);
         editDistance = (EditText)findViewById(R.id.distanceText);
+        editWind = (EditText)findViewById(R.id.windText);
+        editHit = (EditText)findViewById(R.id.hitText);
         buttonSaveHit = (Button)findViewById(R.id.btnSaveHit);
         AddData();
     }
@@ -41,7 +43,7 @@ public class HitActivity extends AppCompatActivity {
                new View.OnClickListener(){
                    @Override
                    public void onClick(View v){
-                       boolean isInserted = myDb.insertData(editClub.getText().toString(), editDistance.getText().toString());
+                       boolean isInserted = myDb.insertData(editClub.getText().toString(), editDistance.getText().toString(), editWind.getText().toString(), editHit.getText().toString());
 
                        if(isInserted == true)
                            Toast.makeText(HitActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();

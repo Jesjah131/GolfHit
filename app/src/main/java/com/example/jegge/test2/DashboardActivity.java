@@ -19,73 +19,19 @@ import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity {
 
-    DatabaseHelper myDb;
     BarChart barChart;
     Button btnViewAll;
+    DatabaseHelper myDb;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        myDb = new DatabaseHelper(this);
         btnViewAll = (Button)findViewById(R.id.btnShowAllData);
         viewAll();
 
-/*
-        barChart = (BarChart) findViewById(R.id.bargraph);
-
-        ArrayList<BarEntry> yVals = new ArrayList<BarEntry>();
-
-        for (int i = 0; i < myDb.queryYData().size(); i++)
-            yVals.add(new BarEntry(myDb.queryYData().get(i), i));
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        for(int i = 0; i < myDb.queryXData().size(); i++)
-            xVals.add(myDb.queryXData().get(i));
-
-        BarDataSet dataSet = new BarDataSet(yVals, "expense values");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-
-        BarData data = new BarData(xVals, dataSet);
-
-
-        LimitLine line = new LimitLine(12f, "average daily expense");
-        line.setTextSize(12f);
-        line.setLineWidth(4f);
-        YAxis leftAxis = barChart.getAxisLeft();
-        leftAxis.addLimitLine(line);
-
-        barChart.setData(data);
-        barChart.setDescription("The expenses chart.");
-        barChart.animateY(2000);
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
-
-        barChart = (BarChart) findViewById(R.id.bargraph);
-
-        ArrayList<BarEntry> barEntries = new ArrayList<>();
-        barEntries.add(new BarEntry(44f,0));
-        barEntries.add(new BarEntry(88f,1));
-        barEntries.add(new BarEntry(66f,2));
-        barEntries.add(new BarEntry(12f,3));
-        barEntries.add(new BarEntry(19f,4));
-        barEntries.add(new BarEntry(91f,5));
-        BarDataSet barDataSet = new BarDataSet(barEntries,"Dates");
-
-        ArrayList<String> theDates = new ArrayList<>();
-        theDates.add("April");
-        theDates.add("May");
-        theDates.add("June");
-        theDates.add("July");
-        theDates.add("August");
-        theDates.add("September");
-
-        BarData theData = new BarData(barDataSet);
-        barChart.setData(theData);
-
-        barChart.setTouchEnabled(false);
-        barChart.setDragEnabled(false);
-        barChart.setScaleEnabled(false);*/
     }
 
     public void viewAll(){
@@ -101,7 +47,10 @@ public class DashboardActivity extends AppCompatActivity {
 
                         StringBuffer buffer = new StringBuffer();
                         while (res.moveToNext()){
-                            buffer.append("Id :" + res.getString(1)+"\n");
+                            buffer.append("\nKlubba: " + res.getString(1)+"\n");
+                            buffer.append("Avstånd: " + res.getString(2)+"\n");
+                            buffer.append("Vind: " + res.getString(3)+"\n");
+                            buffer.append("Träff: " + res.getString(4)+"\n----------");
                         }
 
                         showMessage("Data",buffer.toString());

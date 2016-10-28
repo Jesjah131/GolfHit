@@ -13,12 +13,14 @@ import java.util.ArrayList;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "Database.db";
     protected static final String FIRST_TABLE_NAME = "golfhit_table";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "CLUB";
     public static final String COL_3 = "DISTANCE";
+    public static final String COL_4 = "WIND";
+    public static final String COL_5 = "HIT";
 
 
     public DatabaseHelper(Context context) {
@@ -28,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + FIRST_TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLUB STRING, DISTANCE STRING);");
+        db.execSQL("create table " + FIRST_TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT, CLUB STRING, DISTANCE STRING, WIND STRING, HIT STRING);");
         //db.close();
     }
 
@@ -40,11 +42,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String club, String distance){
+    public boolean insertData(String club, String distance, String wind, String hit){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,club);
         contentValues.put(COL_3,distance);
+        contentValues.put(COL_4,wind);
+        contentValues.put(COL_5,hit);
 
         long result = db.insert(FIRST_TABLE_NAME,null,contentValues);
         if (result == -1)
