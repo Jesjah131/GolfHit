@@ -46,10 +46,10 @@ public class HitActivity extends AppCompatActivity {
                        boolean isInserted = myDb.insertData(editClub.getText().toString(), editDistance.getText().toString(), editWind.getText().toString(), editHit.getText().toString());
 
                        if(isInserted == true)
-                           Toast.makeText(HitActivity.this,"Data Inserted",Toast.LENGTH_LONG).show();
+                           Toast.makeText(HitActivity.this,"Lyckades!",Toast.LENGTH_LONG).show();
 
                        else
-                           Toast.makeText(HitActivity.this,"Data not Inserted",Toast.LENGTH_LONG).show();
+                           Toast.makeText(HitActivity.this,"Lyckades inte!",Toast.LENGTH_LONG).show();
                    }
                }
         );

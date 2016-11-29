@@ -15,8 +15,11 @@
         android:text="Nytt slag"
         android:id="@+id/newHitButton"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="69dp" />
+        android:layout_marginTop="69dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -24,5 +27,8 @@
         android:text="Se statistik"
         android:id="@+id/dashboardButton"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
