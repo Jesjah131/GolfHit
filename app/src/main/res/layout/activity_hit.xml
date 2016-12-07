@@ -106,13 +106,4 @@
         android:layout_alignParentEnd="true" />
 
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:id="@+id/clubText"
-        android:layout_above="@+id/textView2"
-        android:layout_alignRight="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:inputType="text" />
 </RelativeLayout>

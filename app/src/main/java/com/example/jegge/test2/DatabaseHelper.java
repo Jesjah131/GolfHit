@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     private static final String DATABASE_NAME = "Database.db";
     protected static final String FIRST_TABLE_NAME = "golfhit_table";
     public static final String COL_1 = "ID";
@@ -66,26 +66,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<String> queryXData(){
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<String> xNewData = new ArrayList<String>();
-        String query = "SELECT " + COL_2 + " FROM " + FIRST_TABLE_NAME;
+        String query = "SELECT " + COL_3 + " FROM " + FIRST_TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
         for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            xNewData.add(cursor.getString(cursor.getColumnIndex(COL_2)));
+            xNewData.add(cursor.getString(cursor.getColumnIndex(COL_3)));
         }
         cursor.close();
         return xNewData;
     }
 
-    public ArrayList<Float> queryYData(){
+    public Cursor queryYData(){
         SQLiteDatabase db = this.getWritableDatabase();
         ArrayList<Float> yNewData = new ArrayList<Float>();
-        String query = "SELECT " + COL_3 + " FROM " + FIRST_TABLE_NAME;
+        String query = "SELECT "+COL_3+" FROM "+FIRST_TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
-        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            yNewData.add(cursor.getFloat(cursor.getColumnIndex(COL_3)));
-        }
-        cursor.close();
-        return yNewData;
+
+
+        return cursor;
     }
 }
